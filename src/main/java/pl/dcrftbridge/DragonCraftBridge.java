@@ -11,7 +11,7 @@ import java.io.*;
 
 public class DragonCraftBridge extends Plugin implements Listener {
         public void onEnable() {
-            getLogger().info("Yay! It loads!");
+            getLogger().info("Loaded.");
             this.getProxy().registerChannel("BungeeCord");
             this.getProxy().getPluginManager().registerListener(this, this);
         }
@@ -31,7 +31,6 @@ public class DragonCraftBridge extends Plugin implements Listener {
             }
 
             server.sendData("BungeeCord", stream.toByteArray());
-            // Alright quick note here guys : ProxiedPlayer.sendData() [b]WILL NOT WORK[/b]. It will send it to the client, and not to the server the client is connected. See the difference ? You need to send to Server or ServerInfo.
         }
 
         @EventHandler
@@ -50,7 +49,6 @@ public class DragonCraftBridge extends Plugin implements Listener {
             try {
                 if(in.readUTF().equalsIgnoreCase("DragonCraftBridge")){
                     String utf = in.readUTF();
-                    this.getLogger().warning("yess" + utf);
                     if(((Server) ev.getSender()).getInfo().getName().equalsIgnoreCase("skyblock")) {
                         sendMessage(utf, getProxy().getServerInfo("survival"));
                     } else if(((Server) ev.getSender()).getInfo().getName().equalsIgnoreCase("survival")) {
